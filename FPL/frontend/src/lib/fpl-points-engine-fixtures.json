@@ -1,0 +1,858 @@
+{
+  "description": "Sample JSON fixtures for FPL Points Engine testing - realistic scenarios including DGW/blank gameweeks",
+  "scenarios": {
+    "basic_gameweek": {
+      "description": "Standard gameweek with normal scoring",
+      "inputs": {
+        "season_id": "2023-24",
+        "gameweeks": [
+          {
+            "gw": 1,
+            "deadline_utc": "2023-08-12T10:00:00Z",
+            "fixtures_complete": true,
+            "is_blank": false,
+            "is_double": false
+          }
+        ],
+        "player_points_by_gw": {
+          "1": {
+            "101": { "minutes": 90, "total_fpl_points": 6 },
+            "201": { "minutes": 90, "total_fpl_points": 2 },
+            "202": { "minutes": 90, "total_fpl_points": 2 },
+            "203": { "minutes": 90, "total_fpl_points": 6 },
+            "301": { "minutes": 90, "total_fpl_points": 4 },
+            "302": { "minutes": 90, "total_fpl_points": 4 },
+            "303": { "minutes": 90, "total_fpl_points": 8 },
+            "304": { "minutes": 90, "total_fpl_points": 4 },
+            "305": { "minutes": 90, "total_fpl_points": 4 },
+            "401": { "minutes": 90, "total_fpl_points": 12 },
+            "402": { "minutes": 90, "total_fpl_points": 6 },
+            "102": { "minutes": 90, "total_fpl_points": 4 },
+            "204": { "minutes": 90, "total_fpl_points": 3 },
+            "306": { "minutes": 90, "total_fpl_points": 5 },
+            "403": { "minutes": 90, "total_fpl_points": 7 }
+          }
+        },
+        "userTeamByGW": {
+          "1": {
+            "startingXI": [101, 201, 202, 203, 301, 302, 303, 304, 305, 401, 402],
+            "bench": {
+              "gkpBench": 102,
+              "outfield1": 204,
+              "outfield2": 306,
+              "outfield3": 403
+            },
+            "squad": [
+              { "playerId": 101, "position": "GKP" },
+              { "playerId": 201, "position": "DEF" },
+              { "playerId": 202, "position": "DEF" },
+              { "playerId": 203, "position": "DEF" },
+              { "playerId": 301, "position": "MID" },
+              { "playerId": 302, "position": "MID" },
+              { "playerId": 303, "position": "MID" },
+              { "playerId": 304, "position": "MID" },
+              { "playerId": 305, "position": "MID" },
+              { "playerId": 401, "position": "FWD" },
+              { "playerId": 402, "position": "FWD" },
+              { "playerId": 102, "position": "GKP" },
+              { "playerId": 204, "position": "DEF" },
+              { "playerId": 306, "position": "MID" },
+              { "playerId": 403, "position": "FWD" }
+            ],
+            "captaincy": {
+              "captainId": 401,
+              "viceCaptainId": 303
+            },
+            "formation": { "def": 3, "mid": 5, "fwd": 2 },
+            "transfers": {
+              "made": [],
+              "freeTransfersAvailable": 1,
+              "hitsPerExtraTransfer": 4
+            },
+            "chips": {
+              "benchBoost": false,
+              "tripleCaptain": false,
+              "freeHit": false,
+              "wildcard": false
+            }
+          }
+        },
+        "joinConfig": {
+          "firstActiveGW": 1,
+          "userReportedPointsBeforeFirstActiveGW": 0
+        }
+      },
+      "expectedOutput": {
+        "totalPoints": 70,
+        "byGW": [
+          {
+            "gw": 1,
+            "baseXI": [
+              { "playerId": 101, "points": 6 },
+              { "playerId": 201, "points": 2 },
+              { "playerId": 202, "points": 2 },
+              { "playerId": 203, "points": 6 },
+              { "playerId": 301, "points": 4 },
+              { "playerId": 302, "points": 4 },
+              { "playerId": 303, "points": 8 },
+              { "playerId": 304, "points": 4 },
+              { "playerId": 305, "points": 4 },
+              { "playerId": 401, "points": 12 },
+              { "playerId": 402, "points": 6 }
+            ],
+            "autosubsApplied": [],
+            "benchPointsCounted": [],
+            "effectiveXI": [
+              { "playerId": 101, "points": 6 },
+              { "playerId": 201, "points": 2 },
+              { "playerId": 202, "points": 2 },
+              { "playerId": 203, "points": 6 },
+              { "playerId": 301, "points": 4 },
+              { "playerId": 302, "points": 4 },
+              { "playerId": 303, "points": 8 },
+              { "playerId": 304, "points": 4 },
+              { "playerId": 305, "points": 4 },
+              { "playerId": 401, "points": 12 },
+              { "playerId": 402, "points": 6 }
+            ],
+            "captainFinal": { "playerId": 401, "multiplier": 2 },
+            "viceCaptainFinal": 303,
+            "chipEffects": {
+              "benchBoost": false,
+              "tripleCaptain": false,
+              "freeHit": false,
+              "wildcard": false
+            },
+            "transferHits": 0,
+            "gwPoints": 70
+          }
+        ]
+      }
+    },
+    
+    "captain_vice_switch": {
+      "description": "Captain doesn't play, vice-captain auto-promoted",
+      "inputs": {
+        "season_id": "2023-24",
+        "gameweeks": [
+          {
+            "gw": 5,
+            "deadline_utc": "2023-09-16T10:00:00Z",
+            "fixtures_complete": true
+          }
+        ],
+        "player_points_by_gw": {
+          "5": {
+            "101": { "minutes": 90, "total_fpl_points": 6 },
+            "201": { "minutes": 90, "total_fpl_points": 2 },
+            "202": { "minutes": 90, "total_fpl_points": 2 },
+            "203": { "minutes": 90, "total_fpl_points": 6 },
+            "301": { "minutes": 90, "total_fpl_points": 4 },
+            "302": { "minutes": 90, "total_fpl_points": 4 },
+            "303": { "minutes": 90, "total_fpl_points": 10 },
+            "304": { "minutes": 90, "total_fpl_points": 4 },
+            "305": { "minutes": 90, "total_fpl_points": 4 },
+            "401": { "minutes": 0, "total_fpl_points": 0 },
+            "402": { "minutes": 90, "total_fpl_points": 6 },
+            "102": { "minutes": 90, "total_fpl_points": 4 },
+            "204": { "minutes": 90, "total_fpl_points": 3 },
+            "306": { "minutes": 90, "total_fpl_points": 5 },
+            "403": { "minutes": 90, "total_fpl_points": 8 }
+          }
+        },
+        "userTeamByGW": {
+          "5": {
+            "startingXI": [101, 201, 202, 203, 301, 302, 303, 304, 305, 401, 402],
+            "bench": {
+              "gkpBench": 102,
+              "outfield1": 204,
+              "outfield2": 306,
+              "outfield3": 403
+            },
+            "squad": [
+              { "playerId": 101, "position": "GKP" },
+              { "playerId": 201, "position": "DEF" },
+              { "playerId": 202, "position": "DEF" },
+              { "playerId": 203, "position": "DEF" },
+              { "playerId": 301, "position": "MID" },
+              { "playerId": 302, "position": "MID" },
+              { "playerId": 303, "position": "MID" },
+              { "playerId": 304, "position": "MID" },
+              { "playerId": 305, "position": "MID" },
+              { "playerId": 401, "position": "FWD" },
+              { "playerId": 402, "position": "FWD" },
+              { "playerId": 102, "position": "GKP" },
+              { "playerId": 204, "position": "DEF" },
+              { "playerId": 306, "position": "MID" },
+              { "playerId": 403, "position": "FWD" }
+            ],
+            "captaincy": {
+              "captainId": 401,
+              "viceCaptainId": 303
+            },
+            "formation": { "def": 3, "mid": 5, "fwd": 2 },
+            "transfers": {
+              "made": [],
+              "freeTransfersAvailable": 1,
+              "hitsPerExtraTransfer": 4
+            },
+            "chips": {
+              "benchBoost": false,
+              "tripleCaptain": false,
+              "freeHit": false,
+              "wildcard": false
+            }
+          }
+        },
+        "joinConfig": {
+          "firstActiveGW": 5,
+          "userReportedPointsBeforeFirstActiveGW": 0
+        }
+      },
+      "expectedOutput": {
+        "totalPoints": 66,
+        "byGW": [
+          {
+            "gw": 5,
+            "autosubsApplied": [
+              { "outId": 401, "inId": 204, "reason": "FWD 401 (0 mins) replaced by DEF 204 from bench" }
+            ],
+            "captainFinal": { "playerId": 303, "multiplier": 2 },
+            "viceCaptainFinal": 303,
+            "gwPoints": 66
+          }
+        ]
+      }
+    },
+
+    "bench_boost_dgw": {
+      "description": "Bench Boost during Double Gameweek - all 15 players count",
+      "inputs": {
+        "season_id": "2023-24",
+        "gameweeks": [
+          {
+            "gw": 25,
+            "deadline_utc": "2024-02-10T10:00:00Z",
+            "fixtures_complete": true,
+            "is_double": true
+          }
+        ],
+        "player_points_by_gw": {
+          "25": {
+            "101": { "minutes": 180, "total_fpl_points": 12 },
+            "201": { "minutes": 180, "total_fpl_points": 4 },
+            "202": { "minutes": 180, "total_fpl_points": 6 },
+            "203": { "minutes": 180, "total_fpl_points": 8 },
+            "301": { "minutes": 180, "total_fpl_points": 8 },
+            "302": { "minutes": 180, "total_fpl_points": 8 },
+            "303": { "minutes": 90, "total_fpl_points": 6 },
+            "304": { "minutes": 180, "total_fpl_points": 10 },
+            "305": { "minutes": 180, "total_fpl_points": 8 },
+            "401": { "minutes": 180, "total_fpl_points": 20 },
+            "402": { "minutes": 180, "total_fpl_points": 12 },
+            "102": { "minutes": 90, "total_fpl_points": 8 },
+            "204": { "minutes": 180, "total_fpl_points": 6 },
+            "306": { "minutes": 90, "total_fpl_points": 4 },
+            "403": { "minutes": 90, "total_fpl_points": 6 }
+          }
+        },
+        "userTeamByGW": {
+          "25": {
+            "startingXI": [101, 201, 202, 203, 301, 302, 303, 304, 305, 401, 402],
+            "bench": {
+              "gkpBench": 102,
+              "outfield1": 204,
+              "outfield2": 306,
+              "outfield3": 403
+            },
+            "squad": [
+              { "playerId": 101, "position": "GKP" },
+              { "playerId": 201, "position": "DEF" },
+              { "playerId": 202, "position": "DEF" },
+              { "playerId": 203, "position": "DEF" },
+              { "playerId": 301, "position": "MID" },
+              { "playerId": 302, "position": "MID" },
+              { "playerId": 303, "position": "MID" },
+              { "playerId": 304, "position": "MID" },
+              { "playerId": 305, "position": "MID" },
+              { "playerId": 401, "position": "FWD" },
+              { "playerId": 402, "position": "FWD" },
+              { "playerId": 102, "position": "GKP" },
+              { "playerId": 204, "position": "DEF" },
+              { "playerId": 306, "position": "MID" },
+              { "playerId": 403, "position": "FWD" }
+            ],
+            "captaincy": {
+              "captainId": 401,
+              "viceCaptainId": 304
+            },
+            "formation": { "def": 3, "mid": 5, "fwd": 2 },
+            "transfers": {
+              "made": [],
+              "freeTransfersAvailable": 1,
+              "hitsPerExtraTransfer": 4
+            },
+            "chips": {
+              "benchBoost": true,
+              "tripleCaptain": false,
+              "freeHit": false,
+              "wildcard": false
+            }
+          }
+        },
+        "joinConfig": {
+          "firstActiveGW": 25,
+          "userReportedPointsBeforeFirstActiveGW": 0
+        }
+      },
+      "expectedOutput": {
+        "totalPoints": 146,
+        "byGW": [
+          {
+            "gw": 25,
+            "autosubsApplied": [],
+            "benchPointsCounted": [
+              { "playerId": 102, "points": 8 },
+              { "playerId": 204, "points": 6 },
+              { "playerId": 306, "points": 4 },
+              { "playerId": 403, "points": 6 }
+            ],
+            "captainFinal": { "playerId": 401, "multiplier": 2 },
+            "chipEffects": {
+              "benchBoost": true,
+              "tripleCaptain": false,
+              "freeHit": false,
+              "wildcard": false
+            },
+            "gwPoints": 146
+          }
+        ]
+      }
+    },
+
+    "triple_captain_dgw": {
+      "description": "Triple Captain during Double Gameweek for maximum points",
+      "inputs": {
+        "season_id": "2023-24",
+        "gameweeks": [
+          {
+            "gw": 29,
+            "deadline_utc": "2024-03-16T10:00:00Z",
+            "fixtures_complete": true,
+            "is_double": true
+          }
+        ],
+        "player_points_by_gw": {
+          "29": {
+            "101": { "minutes": 180, "total_fpl_points": 10 },
+            "201": { "minutes": 180, "total_fpl_points": 4 },
+            "202": { "minutes": 180, "total_fpl_points": 6 },
+            "203": { "minutes": 180, "total_fpl_points": 8 },
+            "301": { "minutes": 180, "total_fpl_points": 8 },
+            "302": { "minutes": 180, "total_fpl_points": 8 },
+            "303": { "minutes": 180, "total_fpl_points": 12 },
+            "304": { "minutes": 180, "total_fpl_points": 10 },
+            "305": { "minutes": 180, "total_fpl_points": 8 },
+            "401": { "minutes": 180, "total_fpl_points": 24 },
+            "402": { "minutes": 180, "total_fpl_points": 12 },
+            "102": { "minutes": 90, "total_fpl_points": 6 },
+            "204": { "minutes": 90, "total_fpl_points": 2 },
+            "306": { "minutes": 90, "total_fpl_points": 4 },
+            "403": { "minutes": 90, "total_fpl_points": 6 }
+          }
+        },
+        "userTeamByGW": {
+          "29": {
+            "startingXI": [101, 201, 202, 203, 301, 302, 303, 304, 305, 401, 402],
+            "bench": {
+              "gkpBench": 102,
+              "outfield1": 204,
+              "outfield2": 306,
+              "outfield3": 403
+            },
+            "squad": [
+              { "playerId": 101, "position": "GKP" },
+              { "playerId": 201, "position": "DEF" },
+              { "playerId": 202, "position": "DEF" },
+              { "playerId": 203, "position": "DEF" },
+              { "playerId": 301, "position": "MID" },
+              { "playerId": 302, "position": "MID" },
+              { "playerId": 303, "position": "MID" },
+              { "playerId": 304, "position": "MID" },
+              { "playerId": 305, "position": "MID" },
+              { "playerId": 401, "position": "FWD" },
+              { "playerId": 402, "position": "FWD" },
+              { "playerId": 102, "position": "GKP" },
+              { "playerId": 204, "position": "DEF" },
+              { "playerId": 306, "position": "MID" },
+              { "playerId": 403, "position": "FWD" }
+            ],
+            "captaincy": {
+              "captainId": 401,
+              "viceCaptainId": 303
+            },
+            "formation": { "def": 3, "mid": 5, "fwd": 2 },
+            "transfers": {
+              "made": [],
+              "freeTransfersAvailable": 1,
+              "hitsPerExtraTransfer": 4
+            },
+            "chips": {
+              "benchBoost": false,
+              "tripleCaptain": true,
+              "freeHit": false,
+              "wildcard": false
+            }
+          }
+        },
+        "joinConfig": {
+          "firstActiveGW": 29,
+          "userReportedPointsBeforeFirstActiveGW": 0
+        }
+      },
+      "expectedOutput": {
+        "totalPoints": 158,
+        "byGW": [
+          {
+            "gw": 29,
+            "captainFinal": { "playerId": 401, "multiplier": 3 },
+            "chipEffects": {
+              "benchBoost": false,
+              "tripleCaptain": true,
+              "freeHit": false,
+              "wildcard": false
+            },
+            "gwPoints": 158
+          }
+        ]
+      }
+    },
+
+    "blank_gameweek": {
+      "description": "Blank gameweek where some teams don't play",
+      "inputs": {
+        "season_id": "2023-24",
+        "gameweeks": [
+          {
+            "gw": 33,
+            "deadline_utc": "2024-04-20T10:00:00Z",
+            "fixtures_complete": true,
+            "is_blank": true
+          }
+        ],
+        "player_points_by_gw": {
+          "33": {
+            "101": { "minutes": 0, "total_fpl_points": 0 },
+            "201": { "minutes": 90, "total_fpl_points": 2 },
+            "202": { "minutes": 0, "total_fpl_points": 0 },
+            "203": { "minutes": 90, "total_fpl_points": 6 },
+            "301": { "minutes": 0, "total_fpl_points": 0 },
+            "302": { "minutes": 90, "total_fpl_points": 4 },
+            "303": { "minutes": 90, "total_fpl_points": 8 },
+            "304": { "minutes": 0, "total_fpl_points": 0 },
+            "305": { "minutes": 0, "total_fpl_points": 0 },
+            "401": { "minutes": 0, "total_fpl_points": 0 },
+            "402": { "minutes": 90, "total_fpl_points": 6 },
+            "102": { "minutes": 90, "total_fpl_points": 6 },
+            "204": { "minutes": 0, "total_fpl_points": 0 },
+            "306": { "minutes": 90, "total_fpl_points": 5 },
+            "403": { "minutes": 0, "total_fpl_points": 0 }
+          }
+        },
+        "userTeamByGW": {
+          "33": {
+            "startingXI": [101, 201, 202, 203, 301, 302, 303, 304, 305, 401, 402],
+            "bench": {
+              "gkpBench": 102,
+              "outfield1": 204,
+              "outfield2": 306,
+              "outfield3": 403
+            },
+            "squad": [
+              { "playerId": 101, "position": "GKP" },
+              { "playerId": 201, "position": "DEF" },
+              { "playerId": 202, "position": "DEF" },
+              { "playerId": 203, "position": "DEF" },
+              { "playerId": 301, "position": "MID" },
+              { "playerId": 302, "position": "MID" },
+              { "playerId": 303, "position": "MID" },
+              { "playerId": 304, "position": "MID" },
+              { "playerId": 305, "position": "MID" },
+              { "playerId": 401, "position": "FWD" },
+              { "playerId": 402, "position": "FWD" },
+              { "playerId": 102, "position": "GKP" },
+              { "playerId": 204, "position": "DEF" },
+              { "playerId": 306, "position": "MID" },
+              { "playerId": 403, "position": "FWD" }
+            ],
+            "captaincy": {
+              "captainId": 401,
+              "viceCaptainId": 303
+            },
+            "formation": { "def": 3, "mid": 5, "fwd": 2 },
+            "transfers": {
+              "made": [],
+              "freeTransfersAvailable": 1,
+              "hitsPerExtraTransfer": 4
+            },
+            "chips": {
+              "benchBoost": false,
+              "tripleCaptain": false,
+              "freeHit": false,
+              "wildcard": false
+            }
+          }
+        },
+        "joinConfig": {
+          "firstActiveGW": 33,
+          "userReportedPointsBeforeFirstActiveGW": 0
+        }
+      },
+      "expectedOutput": {
+        "totalPoints": 42,
+        "byGW": [
+          {
+            "gw": 33,
+            "autosubsApplied": [
+              { "outId": 101, "inId": 102, "reason": "Goalkeeper 101 (0 mins) replaced by bench keeper 102" },
+              { "outId": 202, "inId": 306, "reason": "DEF 202 (0 mins) replaced by MID 306 from bench" }
+            ],
+            "captainFinal": { "playerId": 303, "multiplier": 2 },
+            "gwPoints": 42
+          }
+        ]
+      }
+    },
+
+    "transfer_hits_wildcard": {
+      "description": "Multiple transfers with hits, then Wildcard negates hits",
+      "inputs": {
+        "season_id": "2023-24",
+        "gameweeks": [
+          {
+            "gw": 10,
+            "deadline_utc": "2023-10-28T10:00:00Z",
+            "fixtures_complete": true
+          },
+          {
+            "gw": 11,
+            "deadline_utc": "2023-11-04T10:00:00Z",
+            "fixtures_complete": true
+          }
+        ],
+        "player_points_by_gw": {
+          "10": {
+            "101": { "minutes": 90, "total_fpl_points": 6 },
+            "201": { "minutes": 90, "total_fpl_points": 2 },
+            "202": { "minutes": 90, "total_fpl_points": 2 },
+            "203": { "minutes": 90, "total_fpl_points": 6 },
+            "301": { "minutes": 90, "total_fpl_points": 4 },
+            "302": { "minutes": 90, "total_fpl_points": 4 },
+            "303": { "minutes": 90, "total_fpl_points": 8 },
+            "304": { "minutes": 90, "total_fpl_points": 4 },
+            "305": { "minutes": 90, "total_fpl_points": 4 },
+            "401": { "minutes": 90, "total_fpl_points": 12 },
+            "402": { "minutes": 90, "total_fpl_points": 6 },
+            "102": { "minutes": 90, "total_fpl_points": 4 },
+            "204": { "minutes": 90, "total_fpl_points": 3 },
+            "306": { "minutes": 90, "total_fpl_points": 5 },
+            "403": { "minutes": 90, "total_fpl_points": 7 }
+          },
+          "11": {
+            "101": { "minutes": 90, "total_fpl_points": 8 },
+            "201": { "minutes": 90, "total_fpl_points": 4 },
+            "202": { "minutes": 90, "total_fpl_points": 4 },
+            "203": { "minutes": 90, "total_fpl_points": 8 },
+            "301": { "minutes": 90, "total_fpl_points": 6 },
+            "302": { "minutes": 90, "total_fpl_points": 6 },
+            "303": { "minutes": 90, "total_fpl_points": 10 },
+            "304": { "minutes": 90, "total_fpl_points": 6 },
+            "305": { "minutes": 90, "total_fpl_points": 6 },
+            "401": { "minutes": 90, "total_fpl_points": 15 },
+            "402": { "minutes": 90, "total_fpl_points": 8 },
+            "102": { "minutes": 90, "total_fpl_points": 6 },
+            "204": { "minutes": 90, "total_fpl_points": 5 },
+            "306": { "minutes": 90, "total_fpl_points": 7 },
+            "403": { "minutes": 90, "total_fpl_points": 9 }
+          }
+        },
+        "userTeamByGW": {
+          "10": {
+            "startingXI": [101, 201, 202, 203, 301, 302, 303, 304, 305, 401, 402],
+            "bench": {
+              "gkpBench": 102,
+              "outfield1": 204,
+              "outfield2": 306,
+              "outfield3": 403
+            },
+            "squad": [
+              { "playerId": 101, "position": "GKP" },
+              { "playerId": 201, "position": "DEF" },
+              { "playerId": 202, "position": "DEF" },
+              { "playerId": 203, "position": "DEF" },
+              { "playerId": 301, "position": "MID" },
+              { "playerId": 302, "position": "MID" },
+              { "playerId": 303, "position": "MID" },
+              { "playerId": 304, "position": "MID" },
+              { "playerId": 305, "position": "MID" },
+              { "playerId": 401, "position": "FWD" },
+              { "playerId": 402, "position": "FWD" },
+              { "playerId": 102, "position": "GKP" },
+              { "playerId": 204, "position": "DEF" },
+              { "playerId": 306, "position": "MID" },
+              { "playerId": 403, "position": "FWD" }
+            ],
+            "captaincy": {
+              "captainId": 401,
+              "viceCaptainId": 303
+            },
+            "formation": { "def": 3, "mid": 5, "fwd": 2 },
+            "transfers": {
+              "made": [
+                { "inId": 999, "outId": 998 },
+                { "inId": 997, "outId": 996 },
+                { "inId": 995, "outId": 994 }
+              ],
+              "freeTransfersAvailable": 1,
+              "hitsPerExtraTransfer": 4
+            },
+            "chips": {
+              "benchBoost": false,
+              "tripleCaptain": false,
+              "freeHit": false,
+              "wildcard": false
+            }
+          },
+          "11": {
+            "startingXI": [101, 201, 202, 203, 301, 302, 303, 304, 305, 401, 402],
+            "bench": {
+              "gkpBench": 102,
+              "outfield1": 204,
+              "outfield2": 306,
+              "outfield3": 403
+            },
+            "squad": [
+              { "playerId": 101, "position": "GKP" },
+              { "playerId": 201, "position": "DEF" },
+              { "playerId": 202, "position": "DEF" },
+              { "playerId": 203, "position": "DEF" },
+              { "playerId": 301, "position": "MID" },
+              { "playerId": 302, "position": "MID" },
+              { "playerId": 303, "position": "MID" },
+              { "playerId": 304, "position": "MID" },
+              { "playerId": 305, "position": "MID" },
+              { "playerId": 401, "position": "FWD" },
+              { "playerId": 402, "position": "FWD" },
+              { "playerId": 102, "position": "GKP" },
+              { "playerId": 204, "position": "DEF" },
+              { "playerId": 306, "position": "MID" },
+              { "playerId": 403, "position": "FWD" }
+            ],
+            "captaincy": {
+              "captainId": 401,
+              "viceCaptainId": 303
+            },
+            "formation": { "def": 3, "mid": 5, "fwd": 2 },
+            "transfers": {
+              "made": [
+                { "inId": 991, "outId": 990 },
+                { "inId": 989, "outId": 988 },
+                { "inId": 987, "outId": 986 },
+                { "inId": 985, "outId": 984 },
+                { "inId": 983, "outId": 982 }
+              ],
+              "freeTransfersAvailable": 1,
+              "hitsPerExtraTransfer": 4
+            },
+            "chips": {
+              "benchBoost": false,
+              "tripleCaptain": false,
+              "freeHit": false,
+              "wildcard": true
+            }
+          }
+        },
+        "joinConfig": {
+          "firstActiveGW": 10,
+          "userReportedPointsBeforeFirstActiveGW": 0
+        }
+      },
+      "expectedOutput": {
+        "totalPoints": 147,
+        "byGW": [
+          {
+            "gw": 10,
+            "transferHits": -8,
+            "gwPoints": 62
+          },
+          {
+            "gw": 11,
+            "transferHits": 0,
+            "chipEffects": {
+              "wildcard": true
+            },
+            "gwPoints": 85
+          }
+        ]
+      }
+    },
+
+    "mid_season_join": {
+      "description": "User joins mid-season with points offset",
+      "inputs": {
+        "season_id": "2023-24",
+        "gameweeks": [
+          {
+            "gw": 15,
+            "deadline_utc": "2023-12-09T10:00:00Z",
+            "fixtures_complete": true
+          },
+          {
+            "gw": 16,
+            "deadline_utc": "2023-12-16T10:00:00Z",
+            "fixtures_complete": true
+          }
+        ],
+        "player_points_by_gw": {
+          "15": {
+            "101": { "minutes": 90, "total_fpl_points": 6 },
+            "201": { "minutes": 90, "total_fpl_points": 2 },
+            "202": { "minutes": 90, "total_fpl_points": 2 },
+            "203": { "minutes": 90, "total_fpl_points": 6 },
+            "301": { "minutes": 90, "total_fpl_points": 4 },
+            "302": { "minutes": 90, "total_fpl_points": 4 },
+            "303": { "minutes": 90, "total_fpl_points": 8 },
+            "304": { "minutes": 90, "total_fpl_points": 4 },
+            "305": { "minutes": 90, "total_fpl_points": 4 },
+            "401": { "minutes": 90, "total_fpl_points": 12 },
+            "402": { "minutes": 90, "total_fpl_points": 6 },
+            "102": { "minutes": 90, "total_fpl_points": 4 },
+            "204": { "minutes": 90, "total_fpl_points": 3 },
+            "306": { "minutes": 90, "total_fpl_points": 5 },
+            "403": { "minutes": 90, "total_fpl_points": 7 }
+          },
+          "16": {
+            "101": { "minutes": 90, "total_fpl_points": 8 },
+            "201": { "minutes": 90, "total_fpl_points": 4 },
+            "202": { "minutes": 90, "total_fpl_points": 4 },
+            "203": { "minutes": 90, "total_fpl_points": 8 },
+            "301": { "minutes": 90, "total_fpl_points": 6 },
+            "302": { "minutes": 90, "total_fpl_points": 6 },
+            "303": { "minutes": 90, "total_fpl_points": 10 },
+            "304": { "minutes": 90, "total_fpl_points": 6 },
+            "305": { "minutes": 90, "total_fpl_points": 6 },
+            "401": { "minutes": 90, "total_fpl_points": 15 },
+            "402": { "minutes": 90, "total_fpl_points": 8 },
+            "102": { "minutes": 90, "total_fpl_points": 6 },
+            "204": { "minutes": 90, "total_fpl_points": 5 },
+            "306": { "minutes": 90, "total_fpl_points": 7 },
+            "403": { "minutes": 90, "total_fpl_points": 9 }
+          }
+        },
+        "userTeamByGW": {
+          "15": {
+            "startingXI": [101, 201, 202, 203, 301, 302, 303, 304, 305, 401, 402],
+            "bench": {
+              "gkpBench": 102,
+              "outfield1": 204,
+              "outfield2": 306,
+              "outfield3": 403
+            },
+            "squad": [
+              { "playerId": 101, "position": "GKP" },
+              { "playerId": 201, "position": "DEF" },
+              { "playerId": 202, "position": "DEF" },
+              { "playerId": 203, "position": "DEF" },
+              { "playerId": 301, "position": "MID" },
+              { "playerId": 302, "position": "MID" },
+              { "playerId": 303, "position": "MID" },
+              { "playerId": 304, "position": "MID" },
+              { "playerId": 305, "position": "MID" },
+              { "playerId": 401, "position": "FWD" },
+              { "playerId": 402, "position": "FWD" },
+              { "playerId": 102, "position": "GKP" },
+              { "playerId": 204, "position": "DEF" },
+              { "playerId": 306, "position": "MID" },
+              { "playerId": 403, "position": "FWD" }
+            ],
+            "captaincy": {
+              "captainId": 401,
+              "viceCaptainId": 303
+            },
+            "formation": { "def": 3, "mid": 5, "fwd": 2 },
+            "transfers": {
+              "made": [],
+              "freeTransfersAvailable": 1,
+              "hitsPerExtraTransfer": 4
+            },
+            "chips": {
+              "benchBoost": false,
+              "tripleCaptain": false,
+              "freeHit": false,
+              "wildcard": false
+            }
+          },
+          "16": {
+            "startingXI": [101, 201, 202, 203, 301, 302, 303, 304, 305, 401, 402],
+            "bench": {
+              "gkpBench": 102,
+              "outfield1": 204,
+              "outfield2": 306,
+              "outfield3": 403
+            },
+            "squad": [
+              { "playerId": 101, "position": "GKP" },
+              { "playerId": 201, "position": "DEF" },
+              { "playerId": 202, "position": "DEF" },
+              { "playerId": 203, "position": "DEF" },
+              { "playerId": 301, "position": "MID" },
+              { "playerId": 302, "position": "MID" },
+              { "playerId": 303, "position": "MID" },
+              { "playerId": 304, "position": "MID" },
+              { "playerId": 305, "position": "MID" },
+              { "playerId": 401, "position": "FWD" },
+              { "playerId": 402, "position": "FWD" },
+              { "playerId": 102, "position": "GKP" },
+              { "playerId": 204, "position": "DEF" },
+              { "playerId": 306, "position": "MID" },
+              { "playerId": 403, "position": "FWD" }
+            ],
+            "captaincy": {
+              "captainId": 401,
+              "viceCaptainId": 303
+            },
+            "formation": { "def": 3, "mid": 5, "fwd": 2 },
+            "transfers": {
+              "made": [],
+              "freeTransfersAvailable": 1,
+              "hitsPerExtraTransfer": 4
+            },
+            "chips": {
+              "benchBoost": false,
+              "tripleCaptain": false,
+              "freeHit": false,
+              "wildcard": false
+            }
+          }
+        },
+        "joinConfig": {
+          "firstActiveGW": 15,
+          "userReportedPointsBeforeFirstActiveGW": 742
+        }
+      },
+      "expectedOutput": {
+        "totalPoints": 897,
+        "byGW": [
+          {
+            "gw": 15,
+            "gwPoints": 70
+          },
+          {
+            "gw": 16,
+            "gwPoints": 85
+          }
+        ]
+      }
+    }
+  }
+}

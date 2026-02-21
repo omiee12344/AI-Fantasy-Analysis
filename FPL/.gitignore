@@ -1,0 +1,61 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Logs
+logs
+*.log
+*.log.*
+*.out
+*.out.*
+*.err
+*.err.*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+coverage/
+
+# Vite
+*.vite
+
+# Vite cache
+node_modules/.vite/
+frontend/node_modules/.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Editor / OS junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+*.iml
+
+# Backend outputs
+backend/dist/
+backend/.tsbuildinfo
+
+# Frontend outputs
+frontend/dist/
+frontend/.tsbuildinfo
+
+# Optional: lockfiles (if you don't want to commit them)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+nul

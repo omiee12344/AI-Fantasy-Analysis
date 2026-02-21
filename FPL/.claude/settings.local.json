@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(pkill:*)",
+      "Bash(taskkill:*)",
+      "Bash(cmd.exe:*)",
+      "Bash(npx kill-port:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Read(/C:\\Users\\wanin\\Downloads/**)",
+      "Bash(npm start)",
+      "Bash(sed:*)",
+      "Bash(grep:*)",
+      "Read(/C:\\Users\\wanin\\Downloads/**)",
+      "Bash(npx tsc:*)",
+      "WebFetch(domain:img.freepik.com)",
+      "Bash(rg:*)",
+      "WebFetch(domain:fantasy.premierleague.com)",
+      "Bash(timeout 10 npm run dev)",
+      "Bash(dir:*)",
+      "Bash(rm:*)",
+      "Bash(find:*)",
+      "Bash(python:*)",
+      "Bash(npm ls:*)",
+      "Bash(timeout 5 curl -s \"http://localhost:8083/src/pages/MyTeam\")",
+      "Bash(/dev/null)",
+      "Bash(timeout:*)",
+      "Bash(move \"EditProfileForm.tsx\" \"EditProfileForm-broken.tsx\")",
+      "Bash(move \"EditProfileForm-fixed.tsx\" \"EditProfileForm.tsx\")",
+      "Bash(move \"EditProfileForm-broken.tsx\" \"EditProfileForm-broken.tsx.disabled\")",
+      "Bash(ren:*)",
+      "mcp__ide__getDiagnostics",
+      "Read(C:\\Users\\wanin\\Downloads/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

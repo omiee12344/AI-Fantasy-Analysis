@@ -1,0 +1,277 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premier League Black, White & Neon Green Theme with Premier League Fonts */
+
+@layer base {
+  :root {
+    /* Premier League Color Palette - Black, White & Neon Green */
+    --background: 0 0% 5%;          /* Pure Black Background */
+    --foreground: 0 0% 100%;        /* Pure White Text */
+
+    --card: 0 0% 8%;                /* Dark Gray Cards */
+    --card-foreground: 0 0% 100%;   /* White Card Text */
+
+    --popover: 0 0% 10%;            /* Dark Gray Popover */
+    --popover-foreground: 0 0% 100%; /* White Popover Text */
+
+    --primary: 0 0% 5%;             /* Black Primary */
+    --primary-foreground: 0 0% 100%; /* White Primary Text */
+
+    --secondary: 0 0% 15%;          /* Dark Gray Secondary */
+    --secondary-foreground: 0 0% 100%; /* White Secondary Text */
+
+    --muted: 0 0% 12%;              /* Muted Dark Gray */
+    --muted-foreground: 0 0% 70%;   /* Light Gray Muted Text */
+
+    --accent: 74 100% 50%;          /* Football Lime Green #39FF14 */
+    --accent-foreground: 0 0% 0%;   /* Black on Lime Green */
+
+    --success: 74 100% 50%;         /* Football Lime Green Success */
+    --success-foreground: 0 0% 0%;  /* Black on Success */
+
+    --destructive: 0 84% 60%;       /* Red for errors */
+    --destructive-foreground: 0 0% 100%; /* White on Red */
+
+    --border: 0 0% 20%;             /* Gray Borders */
+    --input: 0 0% 12%;              /* Dark Input Background */
+    --ring: 74 100% 50%;            /* Football Lime Green Focus Ring */
+
+    --radius: 0.5rem;               /* Modern border radius */
+
+    /* Football Theme Colors */
+    --football-primary: 0 0% 5%;          /* Pure Black */
+    --football-accent: 74 100% 50%;       /* Football Lime Green #39FF14 */
+    --football-white: 0 0% 100%;          /* Pure White */
+    --football-dark-gray: 0 0% 15%;       /* Dark Gray */
+    --football-light-gray: 0 0% 85%;      /* Light Gray */
+    --football-border: 0 0% 25%;          /* Border Gray */
+
+    /* Football Gradients */
+    --gradient-primary: linear-gradient(135deg, #000000, #1a1a1a);
+    --gradient-accent: linear-gradient(135deg, #39FF14, #32D912);
+    --gradient-card: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+    --gradient-hero: linear-gradient(135deg, #000000, #39FF14);
+    --gradient-glow: radial-gradient(circle, rgba(57, 255, 20, 0.15) 0%, transparent 70%);
+
+    /* Clean Shadows */
+    --shadow-card: 0 4px 16px -2px rgba(0, 0, 0, 0.3);
+    --shadow-accent: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-glow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-text-glow: none;
+
+    /* Smooth Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-quick: all 0.15s ease-out;
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Sidebar Theme */
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 5%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 74 100% 50%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 74 100% 50%;
+
+    /* Football Sports Typography */
+    --font-heading: 'Bebas Neue', 'Anton', 'Oswald', system-ui, sans-serif;
+    --font-body: 'Roboto Condensed', 'Oswald', system-ui, sans-serif;
+    --font-display: 'Anton', 'Bebas Neue', system-ui, sans-serif;
+    --font-mono: 'Monaco', 'Consolas', monospace;
+  }
+}
+
+@layer components {
+  /* Premier League Component Styles */
+  .pl-card {
+    @apply bg-card border border-border rounded-lg shadow-lg;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+    font-family: var(--font-body);
+  }
+
+  .pl-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+    border-color: hsl(var(--accent) / 0.3);
+  }
+
+  .pl-button-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 font-medium;
+    background: var(--gradient-primary);
+    transition: var(--transition-quick);
+    font-family: var(--font-display);
+    border: 1px solid hsl(var(--accent) / 0.2);
+  }
+
+  .pl-button-primary:hover {
+    box-shadow: var(--shadow-accent);
+    border-color: hsl(var(--accent));
+  }
+
+  .pl-button-accent {
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 font-bold;
+    background: var(--gradient-accent);
+    transition: var(--transition-quick);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .pl-button-accent:hover {
+    transform: translateY(-2px);
+  }
+
+  .pl-glass {
+    @apply backdrop-blur-md border;
+    background: rgba(0, 0, 0, 0.8);
+    border-color: hsl(var(--accent) / 0.2);
+  }
+
+  .pl-glow {
+    box-shadow: var(--shadow-accent);
+  }
+
+  .pl-text-glow {
+    /* No glow - clean text */
+  }
+
+  .pl-pitch {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    box-shadow: inset 0 0 100px rgba(0, 255, 0, 0.1);
+  }
+
+  /* Football Typography Classes */
+  .pl-heading {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .pl-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .pl-body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    letter-spacing: 0.025em;
+  }
+
+  .pl-gradient-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Enhanced Animations */
+  .pl-pulse {
+    animation: pl-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pl-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: .8;
+      box-shadow: var(--shadow-glow);
+    }
+  }
+
+  .pl-bounce-in {
+    animation: pl-bounce-in 0.6s var(--transition-bounce);
+  }
+
+  @keyframes pl-bounce-in {
+    0% {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .text-glow {
+    /* No glow - clean text */
+  }
+
+  /* Anton Font Letter Spacing */
+  .font-display {
+    letter-spacing: 0.05em;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--card));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--accent));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--accent) / 0.8);
+  }
+
+  /* Focus styles */
+  :focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 2px;
+  }
+
+  /* Selection styles */
+  ::selection {
+    background: hsl(var(--accent) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
